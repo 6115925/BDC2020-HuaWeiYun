@@ -1,0 +1,18 @@
+import pandas as pd
+import warnings
+warnings.filterwarnings('ignore')
+pd.set_option('display.max_columns',None)
+df1 = pd.read_csv('new/train大清洗1.csv')
+df2 = pd.read_csv('new/train大清洗2.csv')
+df3 = pd.read_csv('new/train大清洗3.csv')
+df4 = pd.read_csv('new/train大清洗4.csv')
+df5 = pd.read_csv('new/train大清洗5.csv')
+df6= pd.read_csv('new/train大清洗6.csv')
+df7 = pd.read_csv('new/train大清洗7.csv')
+df8 = pd.read_csv('new/train大清洗8.csv')
+df = pd.concat([df1,df2,df3,df4,df5,df6,df7,df8],axis=0)
+print('读完')
+df['timestamp'] = pd.to_datetime(df['timestamp'], infer_datetime_format=True)
+df=df.sort_values(['loadingOrder','timestamp']).reset_index(drop=True)
+print(df.shape[0])
+df.to_csv('new/train大清洗.csv', index=False)
